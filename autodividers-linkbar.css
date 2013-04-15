@@ -9,17 +9,21 @@
 #sorter{
 	position: fixed;
 	top: 60px;
-	right: 110px;
+	right: 30%;
 	width: 20px;
 	z-index: 1;
+	display: none;
 }
 
 #sorter ul{
-	height: 100%;
+	height: 95%;
 }
 
-#sortedList{
-	padding-right: 35px;
+.sortedList{
+	padding-right: 5px;
+	height: 30em;
+	overflow-y: scroll;
+	width:165%;
 }
 
 .hidden {

@@ -37,22 +37,27 @@ $.mobile.document.on( "pageshow", "#demo-page", function() {
 		}
 	});
 
-	$( "#sorter li" ).click( function() {
-		var top,
-			letter = $( this ).text(),
-			divider = $( "#sortedList" ).find( "li.ui-li-divider:contains(" + letter + ")" );
-			
-		if ( divider.length > 0 ) {
-			top = divider.offset().top;
-			$.mobile.silentScroll( top );
-		} else {
-			return false;
-		}
-	});
+	//$( "#sorter li" ).click( function() {
+	//	var top,
+	//		letter = $( this ).text(),
+	//		listtop = $( ".sortedList" ).offset().top;
+	//		divider = $( ".sortedList" ).find( "li.ui-li-divider:contains(" + letter + ")" );
+	//	
+	//	divider.parent().scrollTop(0);	
+	//	if ( divider.length > 0 ) {
+	//		top = divider.offset().top;
+	//		//$.mobile.silentScroll( top );
+	//		
+	//		divider.parent().scrollTop(top - listtop);
+	//		
+	//	} else {
+	//		return false;
+	//	}
+	//});
 	
-	$( "#sorter li" ).hover(function() {
-		$( this ).addClass( "ui-btn-up-b" ).removeClass( "ui-btn-up-c" );
-	}, function() {
-		$( this ).removeClass( "ui-btn-up-b" ).addClass( "ui-btn-up-c" );
-	});
+	//$( "#sorter li" ).hover(function() {
+	//	$( this ).addClass( "ui-btn-up-b" ).removeClass( "ui-btn-up-c" );
+	//}, function() {
+	//	$( this ).removeClass( "ui-btn-up-b" ).addClass( "ui-btn-up-c" );
+	//});
 });

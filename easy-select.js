@@ -40,21 +40,51 @@
             this.$parentElement.bind("click", function(evt){
                 evt.preventDefault();
                 $("#"+options.popupid).popup("open");
-            });
+                
+                
+               	$( "#sorter li" ).click( function() {
+                    var top,
+                        letter = $( this ).text(),
+                        listtop = $( ".sortedList" ).offset().top;
+                        divider = $( ".sortedList" ).find( "li.ui-li-divider:contains(" + letter + ")" );
+                    
+                    divider.parent().scrollTop(0);	
+                    if ( divider.length > 0 ) {
+                        top = divider.offset().top;
+                        
+                        divider.parent().scrollTop(top - listtop);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+
+                setTimeout(function(){
+                    $( "#sorter ul li" ).hover(function() {
+                        $( this ).addClass( "ui-btn-up-b" ).removeClass( "ui-btn-up-c" );
+                    }, function() {
+                        $( this ).removeClass( "ui-btn-up-b" ).addClass( "ui-btn-up-c" );
+                    });
+                    
+                    $("#sorter").show();
+                },1);
+            });                        
 		},
 
 		buildList: function() {
-			$("#"+options.popupid).append('<ul id="thefilter" name="thefilter" data-role="listview" data-autodividers="true" class="sortedList2" ></ul>');
+
+			$("#"+options.popupid).append('<ul id="thefilter" name="thefilter" data-role="listview" data-autodividers="true" class="sortedList" ></ul>');
             $(this.$element).find("option").each(function() {
                 $('#thefilter').append('<li value="' + this.$element + '">'+$(this).text()+'</li>');
             });
             
-            $(thefilter).find("li").bind("click", function(evt){
+            $('#thefilter').find("li").bind("click", function(evt){
                 alert("li = " + $(this).html());
+                $("#"+options.popupid).popup("close");
+                $("#sorter").hide();
             });
             
-//            $("#"+options.popupid).append("<div>Test</div>");
-//            $("#"+options.popupid).trigger("create");
+            $("#"+options.popupid).trigger("create");
 		}
 	};
 
