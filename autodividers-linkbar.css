@@ -5,16 +5,27 @@
 	padding-left: 5px;
 	line-height: 1.8em;
 }
+
 #sorter{
 	position: fixed;
 	top: 60px;
-	right: 0;
+	right: 110px;
 	width: 20px;
 	z-index: 1;
 }
+
 #sorter ul{
 	height: 100%;
 }
+
 #sortedList{
 	padding-right: 35px;
+}
+
+.hidden {
+	display: none;
+}
+
+.state-select {
+	width: 75%;
 }
