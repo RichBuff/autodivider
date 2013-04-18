@@ -8,7 +8,7 @@ function initPage(ars) {
 //     });
      
      $("#state").easySelect({
-            popupid: "popupBasic"
+            popupid: "listPopup"
         });
 
 }
@@ -16,4 +16,5 @@ function initPage(ars) {
 function handleSelectClick(evt) {
     evt.preventDefault();
     alert("test");
+    
 }

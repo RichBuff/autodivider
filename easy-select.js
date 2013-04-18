@@ -12,7 +12,8 @@
 		//Defaults:
 		this.defaults = {
 			something: 'cool',
-            popupid: ''
+            popupid: '',
+            element: $(element)
 		};
 
 		//Extending options:
@@ -37,11 +38,17 @@
 
             this.buildList();
             
+            $("#"+options.popupid).bind("popupbeforeposition", function(evt){
+                var height = $(this).find("ul.sortedList").height();
+//                $("#sorter").css("height",height);
+                $(this).find("ul.sortedList").css("border","0px solid red");
+                $(this).find("ul.sortedList").css("top","-30em");
+            });
+            
             this.$parentElement.bind("click", function(evt){
                 evt.preventDefault();
                 $("#"+options.popupid).popup("open");
-                
-                
+                                
                	$( "#sorter li" ).click( function() {
                     var top,
                         letter = $( this ).text(),
@@ -59,15 +66,15 @@
                     }
                 });
 
-                setTimeout(function(){
-                    $( "#sorter ul li" ).hover(function() {
-                        $( this ).addClass( "ui-btn-up-b" ).removeClass( "ui-btn-up-c" );
-                    }, function() {
-                        $( this ).removeClass( "ui-btn-up-b" ).addClass( "ui-btn-up-c" );
-                    });
-                    
-                    $("#sorter").show();
-                },1);
+                $( "#sorter ul li" ).hover(function() {
+                    $( "#sorter ul li" ).addClass("shorter");
+                    $( this ).addClass( "ui-btn-up-b" ).removeClass( "ui-btn-up-c" );
+                }, function() {
+                    $( "#sorter ul li" ).addClass("higher");
+                    $( this ).removeClass( "ui-btn-up-b" ).addClass( "ui-btn-up-c" );
+                });
+                
+                $("#sorter").show();
             });                        
 		},
 
@@ -75,13 +82,16 @@
 
 			$("#"+options.popupid).append('<ul id="thefilter" name="thefilter" data-role="listview" data-autodividers="true" class="sortedList" ></ul>');
             $(this.$element).find("option").each(function() {
-                $('#thefilter').append('<li value="' + this.$element + '">'+$(this).text()+'</li>');
+                $('#thefilter').append('<li value="' + $(this).val() + '">'+$(this).text()+'</li>');
             });
             
             $('#thefilter').find("li").bind("click", function(evt){
-                alert("li = " + $(this).html());
+//                alert("li = " + $(this).html() + " : " + $(this).attr("value"));
                 $("#"+options.popupid).popup("close");
-                $("#sorter").hide();
+                $("#sorter").hide(400);
+                var somevalue = options.element.val();
+                options.element.val($(this).attr("value"));
+                options.element.trigger('change');
             });
             
             $("#"+options.popupid).trigger("create");
